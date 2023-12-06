@@ -1,0 +1,51 @@
+﻿@model IEnumerable<OgrenciSistem.Models.tOgrenciDers>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.yil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.yariyil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tDers.dersAd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tOgrenci.ogrenciID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.yil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.yariyil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tDers.dersAd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tOgrenci.ogrenciID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ogrenciID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ogrenciID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ogrenciID })
+        </td>
+    </tr>
+}
+
+</table>

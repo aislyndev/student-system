@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OgrencibilgisistemdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tBolum">
+    <Key>
+      <PropertyRef Name="bolumID" />
+    </Key>
+    <Property Name="bolumID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="bolumAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fakulteID" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tDers">
+    <Key>
+      <PropertyRef Name="dersID" />
+    </Key>
+    <Property Name="dersID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="dersAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tFakulte">
+    <Key>
+      <PropertyRef Name="fakulteID" />
+    </Key>
+    <Property Name="fakulteID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fakulteAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tOgrenci">
+    <Key>
+      <PropertyRef Name="ogrenciID" />
+    </Key>
+    <Property Name="ogrenciID" Type="int" Nullable="false" />
+    <Property Name="ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="soyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="bolumID" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Ogrencibilgisistemdb.dbo.tOgrenciDers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tOgrenciDers">
+    <Key>
+      <PropertyRef Name="ogrenciID" />
+      <PropertyRef Name="dersID" />
+      <PropertyRef Name="yil" />
+      <PropertyRef Name="yariyil" />
+    </Key>
+    <Property Name="ogrenciID" Type="int" Nullable="false" />
+    <Property Name="dersID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="yil" Type="int" Nullable="false" />
+    <Property Name="yariyil" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tBolum_tFakulte">
+    <End Role="tFakulte" Type="Self.tFakulte" Multiplicity="1" />
+    <End Role="tBolum" Type="Self.tBolum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tFakulte">
+        <PropertyRef Name="fakulteID" />
+      </Principal>
+      <Dependent Role="tBolum">
+        <PropertyRef Name="fakulteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOgrenci_tBolum">
+    <End Role="tBolum" Type="Self.tBolum" Multiplicity="1" />
+    <End Role="tOgrenci" Type="Self.tOgrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tBolum">
+        <PropertyRef Name="bolumID" />
+      </Principal>
+      <Dependent Role="tOgrenci">
+        <PropertyRef Name="bolumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOgrenciDers_tDers">
+    <End Role="tDers" Type="Self.tDers" Multiplicity="1" />
+    <End Role="tOgrenciDers" Type="Self.tOgrenciDers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tDers">
+        <PropertyRef Name="dersID" />
+      </Principal>
+      <Dependent Role="tOgrenciDers">
+        <PropertyRef Name="dersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tOgrenciDers_tOgrenci">
+    <End Role="tOgrenci" Type="Self.tOgrenci" Multiplicity="1" />
+    <End Role="tOgrenciDers" Type="Self.tOgrenciDers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tOgrenci">
+        <PropertyRef Name="ogrenciID" />
+      </Principal>
+      <Dependent Role="tOgrenciDers">
+        <PropertyRef Name="ogrenciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OgrencibilgisistemdbModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tBolum" EntityType="Self.tBolum" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tDers" EntityType="Self.tDers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tFakulte" EntityType="Self.tFakulte" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tOgrenci" EntityType="Self.tOgrenci" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tOgrenciDers" EntityType="Self.tOgrenciDers" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tOgrenciDers].[ogrenciID] AS [ogrenciID], 
+    [tOgrenciDers].[dersID] AS [dersID], 
+    [tOgrenciDers].[yil] AS [yil], 
+    [tOgrenciDers].[yariyil] AS [yariyil]
+    FROM [dbo].[tOgrenciDers] AS [tOgrenciDers]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tBolum_tFakulte" Association="Self.FK_tBolum_tFakulte">
+      <End Role="tFakulte" EntitySet="tFakulte" />
+      <End Role="tBolum" EntitySet="tBolum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOgrenci_tBolum" Association="Self.FK_tOgrenci_tBolum">
+      <End Role="tBolum" EntitySet="tBolum" />
+      <End Role="tOgrenci" EntitySet="tOgrenci" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOgrenciDers_tDers" Association="Self.FK_tOgrenciDers_tDers">
+      <End Role="tDers" EntitySet="tDers" />
+      <End Role="tOgrenciDers" EntitySet="tOgrenciDers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tOgrenciDers_tOgrenci" Association="Self.FK_tOgrenciDers_tOgrenci">
+      <End Role="tOgrenci" EntitySet="tOgrenci" />
+      <End Role="tOgrenciDers" EntitySet="tOgrenciDers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

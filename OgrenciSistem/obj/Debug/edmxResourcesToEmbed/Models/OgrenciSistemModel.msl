@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OgrencibilgisistemidbModelStoreContainer" CdmEntityContainer="OgrencibilgisistemidbEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tBolum">
+      <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tBolum">
+        <MappingFragment StoreEntitySet="tBolum">
+          <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+          <ScalarProperty Name="bolumAd" ColumnName="bolumAd" />
+          <ScalarProperty Name="fakulteID" ColumnName="fakulteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tDers">
+      <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tDers">
+        <MappingFragment StoreEntitySet="tDers">
+          <ScalarProperty Name="dersID" ColumnName="dersID" />
+          <ScalarProperty Name="dersAd" ColumnName="dersAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tFakulte">
+      <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tFakulte">
+        <MappingFragment StoreEntitySet="tFakulte">
+          <ScalarProperty Name="fakulteID" ColumnName="fakulteID" />
+          <ScalarProperty Name="fakulteAd" ColumnName="fakulteAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tOgrenci">
+      <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tOgrenci">
+        <MappingFragment StoreEntitySet="tOgrenci">
+          <ScalarProperty Name="ogrenciID" ColumnName="ogrenciID" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tOgrenciDers">
+      <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tOgrenciDers">
+        <MappingFragment StoreEntitySet="tOgrenciDers">
+          <ScalarProperty Name="ogrenciID" ColumnName="ogrenciID" />
+          <ScalarProperty Name="dersID" ColumnName="dersID" />
+          <ScalarProperty Name="yil" ColumnName="yil" />
+          <ScalarProperty Name="yariyil" ColumnName="yariyil" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

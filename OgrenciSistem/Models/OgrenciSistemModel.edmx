@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OgrencibilgisistemidbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tBolum">
+          <Key>
+            <PropertyRef Name="bolumID" />
+          </Key>
+          <Property Name="bolumID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bolumAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fakulteID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tDers">
+          <Key>
+            <PropertyRef Name="dersID" />
+          </Key>
+          <Property Name="dersID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dersAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tFakulte">
+          <Key>
+            <PropertyRef Name="fakulteID" />
+          </Key>
+          <Property Name="fakulteID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fakulteAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tOgrenci">
+          <Key>
+            <PropertyRef Name="ogrenciID" />
+          </Key>
+          <Property Name="ogrenciID" Type="int" Nullable="false" />
+          <Property Name="ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="soyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bolumID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tOgrenciDers">
+          <Key>
+            <PropertyRef Name="ogrenciID" />
+          </Key>
+          <Property Name="ogrenciID" Type="int" Nullable="false" />
+          <Property Name="dersID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="yil" Type="int" Nullable="false" />
+          <Property Name="yariyil" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tBolum_tFakulte">
+          <End Role="tFakulte" Type="Self.tFakulte" Multiplicity="1" />
+          <End Role="tBolum" Type="Self.tBolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFakulte">
+              <PropertyRef Name="fakulteID" />
+            </Principal>
+            <Dependent Role="tBolum">
+              <PropertyRef Name="fakulteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOgrenci_tBolum">
+          <End Role="tBolum" Type="Self.tBolum" Multiplicity="1" />
+          <End Role="tOgrenci" Type="Self.tOgrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tBolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="tOgrenci">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOgrenciDers_tDers">
+          <End Role="tDers" Type="Self.tDers" Multiplicity="1" />
+          <End Role="tOgrenciDers" Type="Self.tOgrenciDers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDers">
+              <PropertyRef Name="dersID" />
+            </Principal>
+            <Dependent Role="tOgrenciDers">
+              <PropertyRef Name="dersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOgrenciDers_tOgrenci">
+          <End Role="tOgrenci" Type="Self.tOgrenci" Multiplicity="1" />
+          <End Role="tOgrenciDers" Type="Self.tOgrenciDers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tOgrenci">
+              <PropertyRef Name="ogrenciID" />
+            </Principal>
+            <Dependent Role="tOgrenciDers">
+              <PropertyRef Name="ogrenciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OgrencibilgisistemidbModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tBolum" EntityType="Self.tBolum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDers" EntityType="Self.tDers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tFakulte" EntityType="Self.tFakulte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOgrenci" EntityType="Self.tOgrenci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOgrenciDers" EntityType="Self.tOgrenciDers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tBolum_tFakulte" Association="Self.FK_tBolum_tFakulte">
+            <End Role="tFakulte" EntitySet="tFakulte" />
+            <End Role="tBolum" EntitySet="tBolum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOgrenci_tBolum" Association="Self.FK_tOgrenci_tBolum">
+            <End Role="tBolum" EntitySet="tBolum" />
+            <End Role="tOgrenci" EntitySet="tOgrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOgrenciDers_tDers" Association="Self.FK_tOgrenciDers_tDers">
+            <End Role="tDers" EntitySet="tDers" />
+            <End Role="tOgrenciDers" EntitySet="tOgrenciDers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOgrenciDers_tOgrenci" Association="Self.FK_tOgrenciDers_tOgrenci">
+            <End Role="tOgrenci" EntitySet="tOgrenci" />
+            <End Role="tOgrenciDers" EntitySet="tOgrenciDers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OgrencibilgisistemidbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tBolum">
+          <Key>
+            <PropertyRef Name="bolumID" />
+          </Key>
+          <Property Name="bolumID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bolumAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fakulteID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tFakulte" Relationship="Self.FK_tBolum_tFakulte" FromRole="tBolum" ToRole="tFakulte" />
+          <NavigationProperty Name="tOgrenci" Relationship="Self.FK_tOgrenci_tBolum" FromRole="tBolum" ToRole="tOgrenci" />
+        </EntityType>
+        <EntityType Name="tDers">
+          <Key>
+            <PropertyRef Name="dersID" />
+          </Key>
+          <Property Name="dersID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dersAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tOgrenciDers" Relationship="Self.FK_tOgrenciDers_tDers" FromRole="tDers" ToRole="tOgrenciDers" />
+        </EntityType>
+        <EntityType Name="tFakulte">
+          <Key>
+            <PropertyRef Name="fakulteID" />
+          </Key>
+          <Property Name="fakulteID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fakulteAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tBolum" Relationship="Self.FK_tBolum_tFakulte" FromRole="tFakulte" ToRole="tBolum" />
+        </EntityType>
+        <EntityType Name="tOgrenci">
+          <Key>
+            <PropertyRef Name="ogrenciID" />
+          </Key>
+          <Property Name="ogrenciID" Type="Int32" Nullable="false" />
+          <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bolumID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tBolum" Relationship="Self.FK_tOgrenci_tBolum" FromRole="tOgrenci" ToRole="tBolum" />
+          <NavigationProperty Name="tOgrenciDers" Relationship="Self.FK_tOgrenciDers_tOgrenci" FromRole="tOgrenci" ToRole="tOgrenciDers" />
+        </EntityType>
+        <EntityType Name="tOgrenciDers">
+          <Key>
+            <PropertyRef Name="ogrenciID" />
+          </Key>
+          <Property Name="ogrenciID" Type="Int32" Nullable="false" />
+          <Property Name="dersID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="yil" Type="Int32" Nullable="false" />
+          <Property Name="yariyil" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tDers" Relationship="Self.FK_tOgrenciDers_tDers" FromRole="tOgrenciDers" ToRole="tDers" />
+          <NavigationProperty Name="tOgrenci" Relationship="Self.FK_tOgrenciDers_tOgrenci" FromRole="tOgrenciDers" ToRole="tOgrenci" />
+        </EntityType>
+        <Association Name="FK_tBolum_tFakulte">
+          <End Role="tFakulte" Type="Self.tFakulte" Multiplicity="1" />
+          <End Role="tBolum" Type="Self.tBolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tFakulte">
+              <PropertyRef Name="fakulteID" />
+            </Principal>
+            <Dependent Role="tBolum">
+              <PropertyRef Name="fakulteID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOgrenci_tBolum">
+          <End Role="tBolum" Type="Self.tBolum" Multiplicity="1" />
+          <End Role="tOgrenci" Type="Self.tOgrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tBolum">
+              <PropertyRef Name="bolumID" />
+            </Principal>
+            <Dependent Role="tOgrenci">
+              <PropertyRef Name="bolumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOgrenciDers_tDers">
+          <End Role="tDers" Type="Self.tDers" Multiplicity="1" />
+          <End Role="tOgrenciDers" Type="Self.tOgrenciDers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDers">
+              <PropertyRef Name="dersID" />
+            </Principal>
+            <Dependent Role="tOgrenciDers">
+              <PropertyRef Name="dersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOgrenciDers_tOgrenci">
+          <End Role="tOgrenci" Type="Self.tOgrenci" Multiplicity="1" />
+          <End Role="tOgrenciDers" Type="Self.tOgrenciDers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tOgrenci">
+              <PropertyRef Name="ogrenciID" />
+            </Principal>
+            <Dependent Role="tOgrenciDers">
+              <PropertyRef Name="ogrenciID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OgrencibilgisistemidbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tBolum" EntityType="Self.tBolum" />
+          <EntitySet Name="tDers" EntityType="Self.tDers" />
+          <EntitySet Name="tFakulte" EntityType="Self.tFakulte" />
+          <EntitySet Name="tOgrenci" EntityType="Self.tOgrenci" />
+          <EntitySet Name="tOgrenciDers" EntityType="Self.tOgrenciDers" />
+          <AssociationSet Name="FK_tBolum_tFakulte" Association="Self.FK_tBolum_tFakulte">
+            <End Role="tFakulte" EntitySet="tFakulte" />
+            <End Role="tBolum" EntitySet="tBolum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOgrenci_tBolum" Association="Self.FK_tOgrenci_tBolum">
+            <End Role="tBolum" EntitySet="tBolum" />
+            <End Role="tOgrenci" EntitySet="tOgrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOgrenciDers_tDers" Association="Self.FK_tOgrenciDers_tDers">
+            <End Role="tDers" EntitySet="tDers" />
+            <End Role="tOgrenciDers" EntitySet="tOgrenciDers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOgrenciDers_tOgrenci" Association="Self.FK_tOgrenciDers_tOgrenci">
+            <End Role="tOgrenci" EntitySet="tOgrenci" />
+            <End Role="tOgrenciDers" EntitySet="tOgrenciDers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OgrencibilgisistemidbModelStoreContainer" CdmEntityContainer="OgrencibilgisistemidbEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tBolum">
+            <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tBolum">
+              <MappingFragment StoreEntitySet="tBolum">
+                <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+                <ScalarProperty Name="bolumAd" ColumnName="bolumAd" />
+                <ScalarProperty Name="fakulteID" ColumnName="fakulteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDers">
+            <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tDers">
+              <MappingFragment StoreEntitySet="tDers">
+                <ScalarProperty Name="dersID" ColumnName="dersID" />
+                <ScalarProperty Name="dersAd" ColumnName="dersAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tFakulte">
+            <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tFakulte">
+              <MappingFragment StoreEntitySet="tFakulte">
+                <ScalarProperty Name="fakulteID" ColumnName="fakulteID" />
+                <ScalarProperty Name="fakulteAd" ColumnName="fakulteAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOgrenci">
+            <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tOgrenci">
+              <MappingFragment StoreEntitySet="tOgrenci">
+                <ScalarProperty Name="ogrenciID" ColumnName="ogrenciID" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="bolumID" ColumnName="bolumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOgrenciDers">
+            <EntityTypeMapping TypeName="OgrencibilgisistemidbModel.tOgrenciDers">
+              <MappingFragment StoreEntitySet="tOgrenciDers">
+                <ScalarProperty Name="ogrenciID" ColumnName="ogrenciID" />
+                <ScalarProperty Name="dersID" ColumnName="dersID" />
+                <ScalarProperty Name="yil" ColumnName="yil" />
+                <ScalarProperty Name="yariyil" ColumnName="yariyil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

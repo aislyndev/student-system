@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+
+    <div>
+        <div>
+            <br />
+            <br />
+            <center>
+
+                <button type="button" style="width:500px;height:50px;background-color:cyan " onclick="location.href='@Url.Action("Index", "Fakulte")'">FAKÜLTE EKLE</button>
+            </center>
+
+
+        </div><br />
+        <br />
+        <center>
+            <button type="button" style="width: 500px; height: 50px; background-color: cyan" onclick="location.href='@Url.Action("Index", "Bolum")'">BÖLÜM EKLE</button>
+        </center>
+
+        <div>
+            <br /><br />
+
+            <center>
+                <button type="button" style="width:500px;height:50px;background-color: cyan" onclick="location.href='@Url.Action("Index", "Ogrenci")'">ÖĞRENCİ EKLE</button>
+            </center>
+
+        </div><br />
+        <div>
+            <br /><center>
+                <button type="button" style="width: 500px; height: 50px; background-color: cyan" onclick="location.href='@Url.Action("Index", "Ders")'">DERS EKLE</button>
+            </center>
+        </div><br />
+        <div>
+            <br /><center>
+                <button type="button" style="width: 500px; height: 50px; background-color: cyan" onclick="location.href='@Url.Action("Index", "OgrenciDers")'">ÖĞRENCİYE DERS EKLE</button>
+            </center>
+        </div><br />
+
+        <div>
+            <br /><center>
+                <button type="button" style="width: 500px; height: 50px; background-color: cyan" onclick="location.href='@Url.Action("Index", "OgrenciSorgula")'">ÖĞRENCİ SORGULA</button>
+            </center>
+        </div><br />
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model OgrenciSistem.Models.tOgrenciDers
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tOgrenciDers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.yil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.yil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.yariyil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.yariyil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tDers.dersAd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tDers.dersAd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tOgrenci.ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tOgrenci.ad)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ogrenciID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
